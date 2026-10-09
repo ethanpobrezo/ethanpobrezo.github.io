@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ethan Pobrezo</title>
+<!-- Palette d'unité : appliquée avant l'affichage (évite un flash de l'ancienne couleur).
+     Lecture protégée ; mémorisée seulement si les cookies ont été acceptés, comme le thème. -->
+<script>
+(function(){
+  var r=document.documentElement,p='rx93';
+  try{if(localStorage.getItem('ep-consent')==='yes'){var s=localStorage.getItem('ep-palette');if(/^(rx93|rx78|zaku|gfred)$/.test(s))p=s}}catch(e){}
+  r.setAttribute('data-palette',p);
+})();
+</script>
+<meta name="description" content="Étudiant en BUT Réseaux &amp; Télécoms, parcours Cybersécurité. Projets en administration systèmes, réseaux et développement web.">
+<!-- Favicon : "EP" jaune sur fond anthracite, coin biseauté -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M12 0H64V52L52 64H0V12Z' fill='%2314161a'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-weight='700' font-size='30' fill='%23f2c230'%3EEP%3C/text%3E%3C/svg%3E">
+<!-- Aperçu de partage (Open Graph / Twitter) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ethan Pobrezo · Portfolio">
+<meta property="og:description" content="Étudiant en BUT Réseaux &amp; Télécoms, parcours Cybersécurité. Projets en administration systèmes, réseaux et développement web.">
+<!-- Image d'aperçu 1200×630 : décommente et mets son URL complète (https://...)
+<meta property="og:image" content="[URL d'une image d'aperçu 1200×630]">
+<meta name="twitter:image" content="[URL d'une image d'aperçu 1200×630]">
+-->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ethan Pobrezo · Portfolio">
+<meta name="twitter:description" content="Étudiant en BUT Réseaux &amp; Télécoms, parcours Cybersécurité. Projets en administration systèmes, réseaux et développement web.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* =====================================================================
+   PORTFOLIO ETHAN POBREZO · thème "cockpit"
+   Mise en page : barre HUD fixe, colonne centrée de 1100px, plaques de
+   blindage aux coins biseautés posées sur un fond anthracite quadrillé.
+   Toutes les couleurs, tailles et espacements sont des variables ci-dessous.
+   ===================================================================== */
+:root{
+  /* Couleurs (thème sombre par défaut) */
+  --bg:#14161a;            /* fond principal anthracite */
+  --panel:#1e2127;         /* plaques gris foncé */
+  --panel-2:#252932;       /* plaque survolée / zones internes */
+  --plate:#e8e8ec;         /* plaque blanc cassé (fiche d'unité, contact) */
+  --plate-fg:#14161a;      /* texte sur plaque claire */
+  --plate-muted:#4a4f59;   /* texte secondaire sur plaque claire */
+  --fg:#e8e8ec;            /* texte sur fond sombre */
+  --muted:#a3a8b3;         /* texte secondaire (7:1 sur --bg) */
+  --joint:#343944;         /* jointures 1px entre pièces */
+  --grid:rgba(232,232,236,.035); /* grille de fond */
+  --accent:#f2c230;        /* jaune signalétique, avec parcimonie */
+  --accent-text:#f2c230;   /* jaune utilisé comme couleur de texte */
+  --on-accent:#14161a;     /* texte posé sur le jaune */
+  --alert:#d6402b;         /* rouge, très petits détails uniquement */
+  --hud-bg:rgba(20,22,26,.9);
+  --accent-hover:#ffd34a;  /* accent au survol des boutons pleins */
+  --ink:#14161a;           /* fond sombre fixe (écran de démarrage, hachures d'alerte), identique en clair et en sombre */
+  --ink-muted:#a3a8b3;     /* texte secondaire sur --ink */
+  --ink-accent:#f2c230;    /* accent lisible sur --ink */
+
+  /* Typographie : 3 polices au total */
+  --f-title:"Chakra Petch","Rajdhani",system-ui,sans-serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+
+  /* Espacements et formes */
+  --wrap:1100px;
+  --gutter:clamp(16px,4vw,40px);
+  --section:clamp(64px,9vw,112px);
+  --gap:20px;
+  --cut:14px;              /* taille du biseau des plaques */
+  --hud-h:64px;
+}
+/* Thème clair : même structure, plaques inversées */
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#dcdde2;--panel:#eeeef1;--panel-2:#f7f7f9;--plate:#1e2127;--plate-fg:#e8e8ec;--plate-muted:#a3a8b3;
+    --fg:#14161a;--muted:#474c56;--joint:#b9bcc5;--grid:rgba(20,22,26,.05);
+    --accent-text:#7a5c00;--hud-bg:rgba(220,221,226,.92);color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#dcdde2;--panel:#eeeef1;--panel-2:#f7f7f9;--plate:#1e2127;--plate-fg:#e8e8ec;--plate-muted:#a3a8b3;
+  --fg:#14161a;--muted:#474c56;--joint:#b9bcc5;--grid:rgba(20,22,26,.05);
+  --accent-text:#7a5c00;--hud-bg:rgba(220,221,226,.92);color-scheme:light;
+}
+:root{color-scheme:dark}
+:root[data-theme="light"]{color-scheme:light}
+
+/* =====================================================================
+   PALETTES D'UNITÉ : attribut data-palette sur <html> (rx93 par défaut).
+   RX-93 = les couleurs ci-dessus. Chaque autre palette redéfinit les mêmes
+   variables, en sombre puis en clair (préférence système ou bouton).
+   ===================================================================== */
+/* RX-78 : blanc, bleu, rouge */
+:root[data-palette="rx78"]{
+  --bg:#10141d;--panel:#1a2030;--panel-2:#252a3a;--plate:#eef0f4;--plate-fg:#10141d;--plate-muted:#4a5468;
+  --fg:#eef0f4;--muted:#9aa4b8;--joint:#383d4b;--grid:rgba(238,240,244,.035);
+  --accent:#246bff;--accent-text:#578eff;--on-accent:#ffffff;--accent-hover:#1f5cdb;--alert:#e0303e;--hud-bg:rgba(16,20,29,.9);
+  --ink:#10141d;--ink-muted:#9aa4b8;--ink-accent:#4a85ff;
+}
+@media (prefers-color-scheme: light){
+  :root[data-palette="rx78"]:not([data-theme="dark"]){
+    --bg:#f2f4f8;--panel:#ffffff;--panel-2:#f8fafc;--plate:#1a2030;--plate-fg:#eef0f4;--plate-muted:#9aa4b8;
+    --fg:#10141d;--muted:#4a5468;--joint:#c5c7cc;--grid:rgba(16,20,29,.05);
+    --accent:#1f4fbf;--accent-text:#1f4fbf;--on-accent:#ffffff;--accent-hover:#1b44a4;--alert:#c8202f;--hud-bg:rgba(242,244,248,.92);
+  }
+}
+:root[data-palette="rx78"][data-theme="light"]{
+  --bg:#f2f4f8;--panel:#ffffff;--panel-2:#f8fafc;--plate:#1a2030;--plate-fg:#eef0f4;--plate-muted:#9aa4b8;
+  --fg:#10141d;--muted:#4a5468;--joint:#c5c7cc;--grid:rgba(16,20,29,.05);
+  --accent:#1f4fbf;--accent-text:#1f4fbf;--on-accent:#ffffff;--accent-hover:#1b44a4;--alert:#c8202f;--hud-bg:rgba(242,244,248,.92);
+}
+
+/* ZAKU II : vert militaire, œil rose */
+:root[data-palette="zaku"]{
+  --bg:#111610;--panel:#1b2318;--panel-2:#252d22;--plate:#e6ecdf;--plate-fg:#111610;--plate-muted:#4d5a44;
+  --fg:#e6ecdf;--muted:#98a68c;--joint:#373f34;--grid:rgba(230,236,223,.035);
+  --accent:#8fbf4a;--accent-text:#8fbf4a;--on-accent:#111610;--accent-hover:#a3cb6b;--alert:#ff4f7a;--hud-bg:rgba(17,22,16,.9);
+  --ink:#111610;--ink-muted:#98a68c;--ink-accent:#8fbf4a;
+}
+@media (prefers-color-scheme: light){
+  :root[data-palette="zaku"]:not([data-theme="dark"]){
+    --bg:#eef2e8;--panel:#ffffff;--panel-2:#f6f8f3;--plate:#1b2318;--plate-fg:#e6ecdf;--plate-muted:#98a68c;
+    --fg:#111610;--muted:#4d5a44;--joint:#c2c6bd;--grid:rgba(17,22,16,.05);
+    --accent:#3f6b1f;--accent-text:#3f6b1f;--on-accent:#ffffff;--accent-hover:#365c1b;--alert:#d0285a;--hud-bg:rgba(238,242,232,.92);
+  }
+}
+:root[data-palette="zaku"][data-theme="light"]{
+  --bg:#eef2e8;--panel:#ffffff;--panel-2:#f6f8f3;--plate:#1b2318;--plate-fg:#e6ecdf;--plate-muted:#98a68c;
+  --fg:#111610;--muted:#4d5a44;--joint:#c2c6bd;--grid:rgba(17,22,16,.05);
+  --accent:#3f6b1f;--accent-text:#3f6b1f;--on-accent:#ffffff;--accent-hover:#365c1b;--alert:#d0285a;--hud-bg:rgba(238,242,232,.92);
+}
+
+/* GFRED : violet et vert */
+:root[data-palette="gfred"]{
+  --bg:#14111c;--panel:#211b2e;--panel-2:#2b2538;--plate:#ece8f3;--plate-fg:#14111c;--plate-muted:#5a5070;
+  --fg:#ece8f3;--muted:#a49cb6;--joint:#3d384a;--grid:rgba(236,232,243,.035);
+  --accent:#a8e03a;--accent-text:#a8e03a;--on-accent:#14111c;--accent-hover:#b8e65d;--alert:#9b6cff;--hud-bg:rgba(20,17,28,.9);
+  --ink:#14111c;--ink-muted:#a49cb6;--ink-accent:#a8e03a;
+}
+@media (prefers-color-scheme: light){
+  :root[data-palette="gfred"]:not([data-theme="dark"]){
+    --bg:#f2eff7;--panel:#ffffff;--panel-2:#f8f7fb;--plate:#211b2e;--plate-fg:#ece8f3;--plate-muted:#a49cb6;
+    --fg:#14111c;--muted:#5a5070;--joint:#c6c3cb;--grid:rgba(20,17,28,.05);
+    --accent:#6a3fb0;--accent-text:#6a3fb0;--on-accent:#ffffff;--accent-hover:#5b3697;--alert:#4f8a10;--hud-bg:rgba(242,239,247,.92);
+  }
+}
+:root[data-palette="gfred"][data-theme="light"]{
+  --bg:#f2eff7;--panel:#ffffff;--panel-2:#f8f7fb;--plate:#211b2e;--plate-fg:#ece8f3;--plate-muted:#a49cb6;
+  --fg:#14111c;--muted:#5a5070;--joint:#c6c3cb;--grid:rgba(20,17,28,.05);
+  --accent:#6a3fb0;--accent-text:#6a3fb0;--on-accent:#ffffff;--accent-hover:#5b3697;--alert:#4f8a10;--hud-bg:rgba(242,239,247,.92);
+}
+
+
+/* ---------- Base ---------- */
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hud-h) + 16px)}
+body{
+  margin:0;color:var(--fg);font:400 16px/1.65 var(--f-body);-webkit-font-smoothing:antialiased;
+  background-color:var(--bg);
+  /* grille très discrète, 32px */
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:32px 32px;
+}
+a{color:inherit}
+h1,h2,h3,h4{margin:0;text-wrap:balance;font-family:var(--f-title);font-weight:600}
+p{margin:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gutter)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Petit label technique */
+.code{font:500 11px/1.4 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.code b{color:var(--accent-text);font-weight:500}
+
+/* ---------- Plaque de blindage (coins biseautés) ----------
+   .armor = bordure 1px (fond = couleur de jointure), .armor > .in = contenu.
+   Les deux sont découpés par le même polygone pour garder un liseré net. */
+.armor{
+  --c:var(--cut);
+  clip-path:polygon(var(--c) 0,100% 0,100% calc(100% - var(--c)),calc(100% - var(--c)) 100%,0 100%,0 var(--c));
+  background:var(--joint);padding:1px;transition:background-color .25s,transform .25s;min-width:0;
+}
+.armor > .in{
+  clip-path:inherit;background:var(--panel);height:100%;
+}
+.armor:hover{background:var(--accent);transform:translate(3px,-3px)}
+
+/* Bande de hachures jaune / noir */
+.hazard{height:6px;background:repeating-linear-gradient(-45deg,var(--accent) 0 8px,var(--on-accent) 8px 16px)}
+
+/* ---------- Lien d'évitement ---------- */
+.skip{position:fixed;left:16px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:400;background:var(--accent);color:var(--on-accent);padding:10px 16px;font:600 14px var(--f-title);text-transform:uppercase;letter-spacing:.06em;text-decoration:none;transform:translateY(-200%);transition:transform .2s}
+.skip:focus{transform:none}
+
+/* ---------- Démarrage système (≤ 1 s) ---------- */
+.boot{position:fixed;inset:0;z-index:300;background:var(--ink);display:grid;place-items:center;transition:opacity .25s,visibility .25s}
+.boot.done{opacity:0;visibility:hidden}
+.boot-box{width:min(280px,80vw);font:500 12px/1.8 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted)}
+.boot-box .ok{color:var(--ink-accent)}
+
+/* ---------- Barre HUD ---------- */
+.hud{position:sticky;top:env(safe-area-inset-top,0px);z-index:100;background:var(--hud-bg);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--joint)}
+.hud-in{display:flex;align-items:center;gap:16px;height:var(--hud-h)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;margin-right:auto}
+.brand-mark{width:38px;height:38px;display:grid;place-items:center;font:700 16px var(--f-title);background:var(--accent);color:var(--on-accent);clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.brand-txt{display:flex;flex-direction:column;line-height:1.2}
+.brand-txt strong{font:600 15px var(--f-title);text-transform:uppercase;letter-spacing:.06em}
+.menu{display:flex;list-style:none;margin:0;padding:0;align-self:stretch}
+.menu a{display:flex;align-items:center;height:100%;padding:0 14px;text-decoration:none;font:600 13px var(--f-title);text-transform:uppercase;letter-spacing:.1em;color:var(--muted);position:relative;transition:color .2s}
+.menu a::after{content:"";position:absolute;left:14px;right:14px;bottom:-1px;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .25s}
+.menu a:hover{color:var(--fg)}
+.menu a.active{color:var(--fg)}
+.menu a.active::after{transform:scaleX(1)}
+.menu a.active::before{content:"";position:absolute;left:4px;top:50%;width:4px;height:4px;margin-top:-2px;background:var(--accent)}
+.tools{display:flex;gap:6px}
+.icon-btn{width:40px;height:40px;display:grid;place-items:center;background:transparent;color:var(--fg);border:1px solid var(--joint);cursor:pointer;transition:border-color .2s,color .2s,transform .2s}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent-text);transform:translate(2px,-2px)}
+.icon-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:square}
+.burger{display:none}
+/* icône soleil/lune selon le thème actif */
+.i-moon{display:none}
+:root[data-theme="light"] .i-moon{display:block}
+:root[data-theme="light"] .i-sun{display:none}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]) .i-moon{display:block}
+  :root:not([data-theme="dark"]) .i-sun{display:none}
+}
+@media (max-width:880px){
+  .burger{display:grid}
+  .brand-txt .code{display:none}
+  .menu{position:fixed;left:0;right:0;top:calc(var(--hud-h) + env(safe-area-inset-top,0px));flex-direction:column;background:var(--bg);border-bottom:1px solid var(--joint);padding:8px var(--gutter) 16px;align-self:auto}
+  .menu:not(.open){display:none}
+  .menu a{height:auto;padding:14px 0 14px 18px;border-bottom:1px solid var(--joint);font-size:15px}
+  .menu a::after{display:none}
+}
+
+/* ---------- Boutons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:14px 22px;cursor:pointer;text-decoration:none;
+  font:600 14px/1 var(--f-title);text-transform:uppercase;letter-spacing:.1em;
+  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
+  transition:transform .2s,background-color .2s,border-color .2s,color .2s;background:var(--panel-2);color:var(--fg);border:0;
+}
+.btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:square}
+.btn:hover{transform:translate(3px,-3px);color:var(--accent-text)}
+.btn-accent{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn-accent:hover{background:var(--accent-hover);color:var(--on-accent)}
+
+/* ---------- En-tête de section ---------- */
+section{padding-block:var(--section)}
+.sec-head{display:grid;grid-template-columns:auto 1fr;align-items:end;gap:6px 18px;margin-bottom:36px}
+.sec-head .code{grid-column:1/-1}
+.sec-head h2{font-size:clamp(30px,4.6vw,46px);line-height:1;text-transform:uppercase;letter-spacing:.02em}
+.sec-head .rule{height:1px;background:var(--joint);margin-bottom:8px;position:relative}
+.sec-head .rule::after{content:"";position:absolute;right:0;top:-2px;width:28px;height:5px;background:var(--accent)}
+
+/* Apparition au défilement (visible par défaut si non supporté) */
+@supports (animation-timeline:view()){
+  .reveal{animation:reveal linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
+  @keyframes reveal{from{opacity:.2;transform:translateY(20px)}to{opacity:1;transform:none}}
+}
+
+/* ---------- Accueil : fiche technique d'unité ---------- */
+.hero{padding-block:clamp(48px,8vw,96px) clamp(48px,7vw,80px)}
+.hero-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(28px,5vw,56px);align-items:center}
+.hero .code{display:flex;gap:14px;flex-wrap:wrap}
+.hero h1{font-size:clamp(52px,9.5vw,110px);line-height:.92;text-transform:uppercase;letter-spacing:.01em;margin-top:18px;font-weight:700}
+.hero h1 span{display:block;color:var(--accent-text)}
+.hero-role{margin-top:22px;font-size:clamp(16px,1.8vw,18px);color:var(--muted);max-width:52ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+.hero-cta .btn{padding:14px 16px;letter-spacing:.06em}
+.tick{display:inline-block;width:6px;height:6px;background:var(--alert);margin-right:8px;vertical-align:1px}
+
+.spec{background:var(--joint)}
+.spec > .in{background:var(--plate);color:var(--plate-fg)}
+.spec-top{display:flex;justify-content:space-between;align-items:center;padding:16px 22px 14px;border-bottom:1px solid rgba(127,127,127,.35)}
+.spec-top .code{color:var(--plate-muted)}
+.spec-top .serial{font:700 20px var(--f-title);letter-spacing:.06em}
+.spec dl{margin:0;padding:6px 22px 18px}
+.spec .row{display:grid;grid-template-columns:120px 1fr;gap:12px;padding-block:11px;border-bottom:1px solid rgba(127,127,127,.3)}
+.spec .row:last-child{border-bottom:0}
+.spec dt{font:500 11px/1.9 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--plate-muted)}
+.spec dd{margin:0;font-weight:600;min-width:0}
+.status-on{display:inline-flex;flex-wrap:wrap;line-height:1.5;align-items:center;gap:8px;background:var(--accent);color:var(--on-accent);padding:2px 10px;font:600 13px var(--f-title);letter-spacing:.1em;text-transform:uppercase}
+.spec .hazard{margin:0}
+@media (max-width:880px){.hero-grid{grid-template-columns:1fr}}
+@media (max-width:420px){.spec .row{grid-template-columns:1fr;gap:0}}
+
+/* Entrée du bloc d'accueil après le démarrage */
+.hero .boot-in{animation:slide .5s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(.75s + var(--d,0s))}
+@keyframes slide{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ---------- Profil ---------- */
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:var(--gap)}
+.about .in{padding:28px}
+.lead{font-size:clamp(19px,2.2vw,23px);line-height:1.55;max-width:46ch}
+.lead em{font-style:normal;color:var(--accent-text);font-weight:600}
+.facts{margin:0}
+.fact{display:flex;justify-content:space-between;gap:16px;padding-block:12px;border-bottom:1px solid var(--joint);font-size:15px}
+.fact:first-child{padding-top:0}
+.fact:last-child{border-bottom:0;padding-bottom:0}
+.fact dt{font:500 11px/2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.fact dd{margin:0;font-weight:600;text-align:right}
+@media (max-width:780px){.about{grid-template-columns:1fr}}
+
+/* ---------- Compétences : modules équipés ---------- */
+.modules{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+@media (max-width:980px){.modules{grid-template-columns:repeat(2,1fr)}}
+.module .in{padding:24px;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-content:start}
+.module .slot{grid-row:span 3;width:52px;height:52px;display:grid;place-items:center;border:1px solid var(--joint);font:700 15px var(--f-title);color:var(--accent-text);position:relative}
+.module .slot::after{content:"";position:absolute;right:-1px;bottom:-1px;width:8px;height:8px;background:var(--accent)}
+.module h3{font-size:22px;text-transform:uppercase;letter-spacing:.04em;line-height:1.1}
+.module p{color:var(--muted);font-size:15px}
+.gauge{grid-column:1/-1;display:flex;align-items:center;gap:12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--joint)}
+.gauge .code{text-align:left}
+@media (max-width:640px){.modules{grid-template-columns:1fr}}
+
+/* ---------- Parcours ---------- */
+.log-cols{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.log .in{padding:24px 24px 8px}
+.log h3{font:500 12px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-bottom:16px;border-bottom:1px solid var(--joint);display:flex;justify-content:space-between}
+.log ol{list-style:none;margin:0;padding:0}
+.log li{display:grid;grid-template-columns:118px 1fr;gap:14px;padding-block:18px;border-bottom:1px solid var(--joint)}
+.log li:last-child{border-bottom:0}
+.when{font:500 12px/1.7 var(--f-mono);letter-spacing:.06em;color:var(--accent-text);font-variant-numeric:tabular-nums}
+.log h4{font-size:18px;line-height:1.3}
+.log p{color:var(--muted);font-size:15px;margin-top:2px}
+@media (max-width:780px){.log-cols{grid-template-columns:1fr}}
+@media (max-width:420px){.log li{grid-template-columns:1fr;gap:4px}}
+
+/* ---------- Projets : missions ---------- */
+.missions{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.mission .in{padding:24px;display:flex;flex-direction:column;gap:16px}
+/* Viseur : coins en L autour de la zone visuelle */
+.target{position:relative;padding:22px;display:flex;justify-content:space-between;align-items:flex-end;min-height:120px;background:var(--panel-2)}
+.target::before,.target::after,.target i::before,.target i::after{content:"";position:absolute;width:16px;height:16px;border:0 solid var(--accent)}
+.target::before{left:0;top:0;border-left-width:2px;border-top-width:2px}
+.target::after{right:0;top:0;border-right-width:2px;border-top-width:2px}
+.target i::before{left:0;bottom:0;border-left-width:2px;border-bottom-width:2px}
+.target i::after{right:0;bottom:0;border-right-width:2px;border-bottom-width:2px}
+.target i{position:absolute;inset:0;pointer-events:none}
+.target .num{font:700 clamp(40px,6vw,56px)/1 var(--f-title);letter-spacing:.02em}
+.target .num small{display:block;font:500 11px var(--f-mono);letter-spacing:.16em;color:var(--muted);margin-bottom:6px}
+.state{font:500 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;padding:6px 10px;border:1px solid var(--joint);color:var(--muted)}
+.state.live{border-color:var(--accent);color:var(--accent-text)}
+.state.live::before{content:"";display:inline-block;width:6px;height:6px;background:var(--alert);margin-right:8px;vertical-align:1px}
+.mission h3{font-size:24px;text-transform:uppercase;letter-spacing:.03em;line-height:1.15}
+.mission p{color:var(--muted)}
+.specs{border-top:1px solid var(--joint);padding-top:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:auto}
+.specs .code{margin-right:6px}
+.chip{font:500 12px var(--f-mono);letter-spacing:.04em;padding:5px 10px;background:var(--panel-2);border:1px solid var(--joint)}
+@media (max-width:780px){.missions{grid-template-columns:1fr}}
+
+/* ---------- Projets : cartes cliquables + rapport de mission ---------- */
+.mission{cursor:pointer}
+.mission:focus-visible{outline:none;background:var(--accent);transform:translate(3px,-3px)}  /* l'outline serait coupé par le biseau : on allume la jointure */
+.mission .in{position:relative}
+.open-hint{position:absolute;right:20px;bottom:10px;font:500 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text);opacity:0;transform:translateX(-6px);transition:opacity .2s,transform .2s}
+.mission:hover .open-hint,.mission:focus-visible .open-hint{opacity:1;transform:none}
+.mission .specs{padding-bottom:14px}            /* place pour le label "Ouvrir le rapport" */
+
+/* Fenêtre */
+.report{position:fixed;inset:0;z-index:260;display:flex;justify-content:center;align-items:flex-start;padding:clamp(12px,4vh,48px) 16px;overflow-y:auto;overscroll-behavior:contain}
+.report-backdrop{position:fixed;inset:0;background-color:rgba(10,11,13,.86);
+  background-image:linear-gradient(color-mix(in srgb,var(--accent) 5%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--accent) 5%,transparent) 1px,transparent 1px);background-size:32px 32px}
+.report-panel{position:relative;width:100%;max-width:900px;margin-block:auto}
+.report-panel.armor:hover{transform:none;background:var(--joint)}
+.report-panel > .in{padding:clamp(20px,4vw,40px);display:grid;gap:28px;align-content:start;height:auto;position:relative}
+.report-content{display:grid;gap:28px}
+/* ouverture façon "chargement de données" (≈250 ms) : le panneau se déroule, une ligne jaune balaie */
+.report:not([hidden]) .report-panel{animation:report-in .25s cubic-bezier(.2,.7,.2,1) both}
+.report:not([hidden]) .report-panel > .in::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--accent);animation:report-scan .25s linear both;pointer-events:none}
+@keyframes report-in{from{clip-path:polygon(var(--c) 0,100% 0,100% 0,100% 0,0 0,0 0);opacity:.4}}
+@keyframes report-scan{from{top:0;opacity:1}to{top:100%;opacity:0}}
+.report-close{position:absolute;top:16px;right:16px;z-index:1;display:inline-flex;align-items:center;gap:8px;padding:12px 16px;min-height:44px;cursor:pointer;
+  font:600 13px/1 var(--f-title);text-transform:uppercase;letter-spacing:.12em;color:var(--fg);background:var(--panel-2);border:0;
+  clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);transition:border-color .2s,color .2s}
+.report-close:hover,.report-close:focus-visible{background:var(--accent);color:var(--on-accent);outline:none}
+.report-head{display:grid;gap:8px;justify-items:start;padding-right:120px;padding-bottom:22px;border-bottom:1px solid var(--joint)}
+.report-num{font:700 clamp(44px,8vw,72px)/1 var(--f-title);letter-spacing:.02em;color:var(--accent-text)}
+.report-head h2{font-size:clamp(24px,3.4vw,34px);text-transform:uppercase;letter-spacing:.03em;line-height:1.1}
+.report-text{display:grid;gap:14px;max-width:70ch}
+.report-text p,.report-text li{color:var(--fg)}
+.report-text ul,.report-text ol{margin:0;padding-left:20px;display:grid;gap:6px}
+.report-text figure{margin:8px 0;position:relative;padding:10px;background:var(--panel-2)}
+.report-text img{display:block;width:100%;height:auto}
+.report-text figcaption{font:500 12px var(--f-mono);letter-spacing:.06em;color:var(--muted);margin-top:8px}
+/* Documents joints */
+.report-docs-wrap h3{font:500 12px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-bottom:14px;margin-bottom:16px;border-bottom:1px solid var(--joint)}
+.report-docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.doc{--c:10px;padding:18px;display:flex;flex-direction:column;gap:6px;background:var(--panel-2);border:1px solid var(--joint);min-width:0;
+  clip-path:polygon(var(--c) 0,100% 0,100% calc(100% - var(--c)),calc(100% - var(--c)) 100%,0 100%,0 var(--c));transition:border-color .2s}
+.doc:hover,.doc:focus-within{border-color:var(--accent)}
+.doc-title{font-size:18px;line-height:1.25;text-transform:uppercase;letter-spacing:.03em}
+.doc-desc{color:var(--muted);font-size:14px}
+.doc-meta{font:500 12px var(--f-mono);letter-spacing:.08em;color:var(--muted)}
+.doc-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.doc-actions .btn{padding:12px 16px;font-size:13px;min-height:44px}
+/* Pied */
+.report-foot{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;border-top:1px solid var(--joint);padding-top:18px}
+.report-foot .specs{border:0;padding:0;margin:0}
+.report-links{display:flex;flex-wrap:wrap;gap:10px}
+.report-links:empty{display:none}
+.report-open{overflow:hidden}                     /* page bloquée pendant l'ouverture */
+@media (max-width:640px){
+  .report{padding:0}
+  .report-panel{max-width:none;min-height:100%;margin:0}
+  .report-panel.armor,.report-panel > .in{clip-path:none}
+  .report-close{position:sticky;top:0;justify-self:end;margin:-8px -8px 0 0}
+  .report-head{padding-right:0}
+  .report-docs{grid-template-columns:1fr}
+  .doc-actions .btn{flex:1;justify-content:center}
+}
+
+/* ---------- Parcours : expériences cliquables (journal de service) ---------- */
+.log li.exp{position:relative;cursor:pointer;margin-inline:-12px;padding:18px 12px 34px;border-left:2px solid transparent;transition:background-color .2s,border-color .2s}
+.log li.exp:hover,.log li.exp:focus-visible{background:var(--panel-2);border-left-color:var(--accent)}
+.log li.exp:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.exp-hint{position:absolute;right:12px;bottom:10px;font:500 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text);opacity:0;transform:translateX(-6px);transition:opacity .2s,transform .2s}
+.log li.exp:hover .exp-hint,.log li.exp:focus-visible .exp-hint{opacity:1;transform:none}
+/* En-tête de la fenêtre en mode journal : pas de numéro, ligne organisme · période */
+.report-num:empty{display:none}
+.report-meta{font:500 12px/1.6 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.report-foot .specs:empty{display:none}
+.report-more{font:500 12px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent-text);text-decoration:none;border-bottom:1px solid transparent;padding-block:10px}
+.report-more:hover,.report-more:focus-visible{border-bottom-color:currentColor}
+.report-more:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.report-panel:focus{outline:none}  /* le panneau garde le focus quand on clique dans le texte (Échap reste actif) */
+
+
+/* ---------- Sélecteur de palette (MOD-05) ---------- */
+.palette{margin:0 22px 22px}
+.palette > .code{display:block;margin-bottom:10px}
+.pal-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:640px){.pal-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pal-btn{display:block;width:100%;padding:0;border:0;background:none;color:inherit;cursor:pointer;text-align:left}
+.pal-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+/* bordure fine = fond du cadre (1px), biseau identique aux plaques */
+.pal-frame{display:block;padding:1px;background:var(--joint);clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.pal-face{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--panel-2);clip-path:inherit}
+.pal-btn:hover .pal-frame{background:var(--muted)}
+.pal-btn[aria-pressed="true"] .pal-frame{background:var(--accent)}
+.pal-name{font:500 11px/1.4 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.pal-btn:hover .pal-name{color:var(--fg)}
+.pal-btn[aria-pressed="true"] .pal-name{color:var(--accent-text)}
+/* Pastille : les couleurs propres à chaque palette (ne suivent pas la palette active) */
+.pal-swatch{flex:none;display:flex;width:30px;height:14px;outline:1px solid var(--joint)}
+.pal-swatch i{flex:1}
+/* Transition des couleurs au changement de palette seulement (classe posée ~300 ms par le JS) */
+@media (prefers-reduced-motion:no-preference){
+  html.pal-switch,html.pal-switch *,html.pal-switch *::before,html.pal-switch *::after{
+    transition:background-color .3s ease,color .3s ease,border-color .3s ease!important}
+}
+
+/* ---------- Encart d'avertissement "projet hors ligne" ----------
+   Placé dans .report-docs, il occupe toute la largeur sous les documents. */
+.offline{
+  --c:10px;grid-column:1/-1;position:relative;display:grid;gap:8px;margin-top:6px;
+  padding:22px 20px 18px 22px;background:var(--bg);border-left:3px solid var(--alert);
+  clip-path:polygon(var(--c) 0,100% 0,100% calc(100% - var(--c)),calc(100% - var(--c)) 100%,0 100%,0 var(--c));
+}
+.offline::before{               /* fine bande de hachures rouges / noires, discrète */
+  content:"";position:absolute;left:0;right:0;top:0;height:4px;opacity:.55;
+  background:repeating-linear-gradient(-45deg,var(--alert) 0 6px,var(--ink) 6px 12px);
+}
+.offline-label{font:500 11px/1.4 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--fg)}
+.offline-label::before{content:"";display:inline-block;width:6px;height:6px;background:var(--alert);margin-right:8px;vertical-align:1px}
+.offline p{color:var(--fg);font-size:15px;max-width:70ch}
+/* avec l'encart, la liste de documents passe en flex pour que l'encart n'ajoute pas de colonne vide */
+.report-docs:has(> .offline){display:flex;flex-wrap:wrap}
+.report-docs:has(> .offline) > .doc{flex:1 1 260px}
+.report-docs > .offline{flex:1 1 100%}
+
+/* ---------- Rapport : encart "Mon retour" (commentaire personnel) ---------- */
+.retour{margin:-6px 0 0;padding:16px 20px 12px;background:var(--bg);border-left:2px solid var(--accent);display:grid;gap:8px}
+.retour p{font-style:italic;color:var(--fg)}
+.retour-sign{justify-self:end;font:500 11px/1.4 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- Rapport : sous-titres + encart "en cours de construction" ---------- */
+.report-sub{font:500 12px/1.4 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent-text);margin-top:10px}
+.report-sub:first-of-type{margin-top:0}
+.report-sub + p,.report-sub + ul{margin-top:-6px}
+/* Encart : la bordure jaune est le fond du conteneur (1px), l'intérieur reprend le biseau */
+.building{--c:10px;background:var(--accent);padding:1px;margin-bottom:6px;
+  clip-path:polygon(var(--c) 0,100% 0,100% calc(100% - var(--c)),calc(100% - var(--c)) 100%,0 100%,0 var(--c))}
+.building > div{clip-path:inherit;background:var(--bg);padding:18px 20px;display:grid;gap:8px}
+.building-label{font:500 11px/1.4 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--fg)}
+.building-label::before{content:"";display:inline-block;width:6px;height:6px;background:var(--accent);margin-right:8px;vertical-align:1px;animation:building-blink 1.8s ease-in-out infinite alternate}
+@keyframes building-blink{from{opacity:1}to{opacity:.2}}     /* clignotement lent */
+.building p{color:var(--fg);font-size:15px}
+@media (prefers-reduced-motion:reduce){.building-label::before{animation:none}}
+
+
+/* ---------- Modules secondaires (accordéon) ----------
+   Fermé : numéro + titre + "+". Ouvert (.open) : bordure jaune, "−",
+   description dépliée via grid-template-rows 0fr -> 1fr (≈200 ms). */
+.mods{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.mod.armor:hover{transform:none}                 /* pas de décalage : l'élément bouge déjà en s'ouvrant */
+.mod.armor:has(.mod-btn:hover){background:var(--muted)}
+.mod.open{background:var(--accent)}              /* la jointure 1px devient jaune */
+.mod h3{margin:0}
+.mod-btn{
+  width:100%;display:flex;align-items:center;gap:18px;padding:18px 22px;
+  background:none;border:0;color:var(--fg);cursor:pointer;text-align:left;font:inherit;
+}
+.mod-btn:focus-visible{outline:2px solid var(--accent);outline-offset:-4px}
+.mod-num{flex:none;font:500 12px/1 var(--f-mono);letter-spacing:.14em;color:var(--accent-text)}
+.mod-title{flex:1;min-width:0;font:600 clamp(17px,2vw,20px)/1.25 var(--f-title);text-transform:uppercase;letter-spacing:.04em}
+/* indicateur + / − dessiné en CSS */
+.mod-sign{flex:none;position:relative;width:28px;height:28px;border:1px solid var(--joint);transition:border-color .2s}
+.mod-sign::before,.mod-sign::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2px;margin:-1px 0 0 -6px;background:currentColor;transition:transform .2s}
+.mod-sign::after{transform:rotate(90deg)}
+.mod.open .mod-sign{border-color:var(--accent);color:var(--accent-text)}
+.mod.open .mod-sign::after{transform:rotate(0deg)}   /* la barre verticale se couche : + devient − */
+.mod-panel{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .2s ease,visibility .2s}
+.mod.open .mod-panel{grid-template-rows:1fr;visibility:visible}
+.mod-body{overflow:hidden;min-height:0}
+.mod-body p{margin:0 22px 20px;padding-top:16px;border-top:1px solid var(--joint);color:var(--muted)}
+@media (max-width:520px){
+  .mod-btn{gap:12px;padding:16px}
+  .mod-num{font-size:11px}
+  .mod-body p{margin-inline:16px}
+}
+/* mouvement réduit : ouverture instantanée (déjà couvert par la règle globale, rappelé ici) */
+@media (prefers-reduced-motion:reduce){.mod-panel,.mod-sign::after{transition:none}}
+
+/* ---------- Contact ---------- */
+.contact > .in{background:var(--plate);color:var(--plate-fg);display:grid;grid-template-columns:1.1fr 1fr;gap:32px;padding:clamp(24px,5vw,48px);align-items:center}
+.contact.armor:hover{transform:none;background:var(--joint)}
+.contact .code{color:var(--plate-muted)}
+.contact .code b{color:var(--plate-fg)}
+.contact h2{font-size:clamp(32px,5vw,50px);line-height:1;text-transform:uppercase;margin-top:12px}
+.contact p{color:var(--plate-muted);margin-top:14px;max-width:42ch}
+.c-list{display:grid;gap:10px;min-width:0}
+.c-item{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(127,127,127,.4);min-width:0}
+.c-optional:has(a[href=""]){display:none}   /* lien GitHub / LinkedIn non renseigné : masqué */
+.c-item svg{flex:none;width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6}
+.c-text{flex:1;min-width:0;overflow-wrap:anywhere}
+.c-text small{display:block;font:500 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--plate-muted)}
+.c-text a{font-weight:600;text-decoration:none;border-bottom:1px solid transparent}
+.c-text a:hover{border-bottom-color:currentColor}
+.copy{flex:none;font:600 12px var(--f-title);text-transform:uppercase;letter-spacing:.1em;padding:8px 12px;cursor:pointer;background:transparent;color:inherit;border:1px solid rgba(127,127,127,.5);transition:background-color .2s,color .2s,border-color .2s}
+.copy:hover{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+@media (max-width:880px){.contact > .in{grid-template-columns:1fr}}
+
+/* ---------- Pied de page ---------- */
+.footer{border-top:1px solid var(--joint);padding-block:28px}
+.footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;color:var(--muted);font-size:14px}
+.linkish{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.linkish:hover{color:var(--accent-text)}
+
+/* ---------- Retour en haut ---------- */
+.to-top{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:90;width:48px;height:48px;display:grid;place-items:center;cursor:pointer;background:var(--accent);color:var(--on-accent);border:0;clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s}
+.to-top.show{opacity:1;transform:none;pointer-events:auto}
+.to-top:hover{transform:translate(2px,-2px)}
+.to-top svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:square}
+
+/* ---------- Bandeau cookies ---------- */
+.cookie{position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:150;max-width:560px;margin-inline:auto;filter:drop-shadow(0 18px 30px rgba(0,0,0,.45))}
+.cookie > .in{padding:20px 22px;display:grid;gap:14px}
+.cookie.armor:hover{transform:none;background:var(--joint)}
+.cookie strong{font:600 18px var(--f-title);text-transform:uppercase;letter-spacing:.06em}
+.cookie p{color:var(--muted);font-size:14px;margin-top:4px}
+.cookie-actions{display:flex;gap:10px;flex-wrap:wrap}
+.cookie .btn{padding:11px 18px;font-size:13px}
+
+/* ---------- Recherche ---------- */
+.search{position:fixed;inset:0;z-index:250;display:flex;justify-content:center;align-items:flex-start;padding:calc(10vh + env(safe-area-inset-top,0px)) 16px 16px;background:rgba(10,11,13,.7)}
+.search-box{width:100%;max-width:620px}
+.search-box.armor:hover{transform:none;background:var(--accent)}
+.search-box.armor{background:var(--accent)}
+.search-field{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--joint)}
+.search-field svg{width:20px;height:20px;flex:none;stroke:var(--accent-text);fill:none;stroke-width:1.8}
+.search-field input{flex:1;min-width:0;border:0;background:transparent;color:var(--fg);font:500 17px var(--f-body);outline:none}
+.kbd{font:500 11px var(--f-mono);padding:4px 7px;border:1px solid var(--joint);color:var(--muted)}
+.results{list-style:none;margin:0;padding:8px;max-height:min(60vh,440px);overflow:auto}
+.results a{display:block;padding:12px 14px;text-decoration:none;border-left:2px solid transparent}
+.results a:hover,.results a.sel{background:var(--panel-2);border-left-color:var(--accent)}
+.r-sec{font:500 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text)}
+.r-txt{display:block;font-size:15px;margin-top:2px}
+.results mark{background:var(--accent);color:var(--on-accent);padding:0 2px}
+.empty{padding:20px 14px;color:var(--muted)}
+.flash{outline:2px solid var(--accent);outline-offset:4px;transition:outline-color 1.4s ease}
+.flash.fade{outline-color:transparent}
+.armor.flash{background:var(--accent)}
+
+/* ---------- Mouvement réduit ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .boot{display:none}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<!-- Démarrage système -->
+<div class="boot" id="boot" aria-hidden="true">
+  <div class="boot-box">
+    <div>SYS.R&amp;T · Initialisation</div>
+    <div>UNIT-01 · Nom <span class="ok">OK</span></div>
+  </div>
+</div>
+
+<!-- Barre HUD -->
+<header class="hud" id="hud">
+  <nav class="wrap hud-in" aria-label="Navigation principale">
+    <a class="brand" href="#accueil">
+      <span class="brand-mark">EP</span>
+      <span class="brand-txt"><strong>Ethan Pobrezo</strong><span class="code">UNIT-01 · SYS.R&amp;T</span></span>
+    </a>
+    <ul class="menu" id="menu">
+      <li><a href="#profil">Profil</a></li>
+      <li><a href="#competences">Compétences</a></li>
+      <li><a href="#parcours">Parcours</a></li>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="tools">
+      <button class="icon-btn" id="searchBtn" type="button" aria-label="Rechercher sur le site (Ctrl+K)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Activer le mode clair">
+        <svg class="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+      </button>
+      <button class="icon-btn burger" id="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu">
+        <svg viewBox="0 0 24 24"><path id="burgerPath" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Accueil : fiche technique d'unité -->
+<section class="hero" id="accueil" data-title="Accueil">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="code boot-in"><span><b>UNIT-01</b></span><span>Réseaux &amp; Télécoms</span><span>La Réunion</span></p>
+      <h1 class="boot-in" style="--d:.06s">Ethan <span>Pobrezo</span></h1>
+      <p class="hero-role boot-in" style="--d:.12s" data-search>Étudiant en 3e année de BUT Réseaux et Télécommunications, parcours Cybersécurité, à l'IUT de la Réunion. J'aime comprendre comment une infrastructure fonctionne de bout en bout : la déployer, la documenter et la sécuriser. Je recherche un stage en administration systèmes et réseaux.</p>
+      <div class="hero-cta boot-in" style="--d:.18s">
+        <a class="btn btn-accent" href="#projets">Voir mes projets <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <!-- CV : remplace documents/cv-ethan-pobrezo.pdf par le chemin de ton CV -->
+        <a class="btn" href="documents/cv-ethan-pobrezo.pdf" download>Télécharger mon CV</a>
+        <a class="btn" href="#contact">Me contacter</a>
+      </div>
+    </div>
+
+    <div class="armor spec boot-in" style="--d:.24s" aria-label="Fiche technique">
+      <div class="in">
+        <div class="hazard" aria-hidden="true"></div>
+        <div class="spec-top"><span class="code">Fiche technique</span><span class="serial">UNIT-01</span></div>
+        <dl>
+          <div class="row"><dt>Nom</dt><dd>Ethan Pobrezo</dd></div>
+          <div class="row"><dt>Spécialité</dt><dd>Réseaux &amp; Télécoms · parcours Cybersécurité</dd></div>
+          <div class="row"><dt>Statut</dt><dd><span class="status-on">Recherche stage · dès maintenant</span></dd></div>
+          <div class="row"><dt>Formation</dt><dd>BUT R&amp;T · 3e année</dd></div>
+          <div class="row"><dt>Promotion</dt><dd>2024 – 2027</dd></div>
+          <div class="row"><dt>Localisation</dt><dd>Saint-Pierre, 974</dd></div>
+          <div class="row"><dt>Langues</dt><dd>FR natif · EN B2</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main id="contenu" tabindex="-1">
+
+  <!-- Profil -->
+  <section id="profil" data-title="Profil">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="code"><b>SYS.01</b> · Identification</span><h2>Profil</h2><span class="rule"></span></div>
+      <div class="about">
+        <div class="armor reveal"><div class="in">
+          <p class="lead" data-search>Étudiant en dernière année à l'IUT de la Réunion, je m'intéresse aux <em>réseaux</em>, au <em>développement web</em> et à la <em>fabrication numérique</em>. Je souhaite mettre mes compétences au service de projets concrets.</p>
+        </div></div>
+        <div class="armor reveal"><div class="in">
+          <dl class="facts">
+            <div class="fact" data-search><dt>Formation</dt><dd>BUT Réseaux et Télécommunications</dd></div>
+            <div class="fact" data-search><dt>Établissement</dt><dd>IUT de la Réunion</dd></div>
+            <div class="fact" data-search><dt>Ville</dt><dd>Saint-Pierre, La Réunion</dd></div>
+            <div class="fact" data-search><dt>Dernier stage</dt><dd>Mairie de Saint-Pierre</dd></div>
+          </dl>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compétences : modules équipés. Niveau = nombre de cases .on sur 5 -->
+  <section id="competences" data-title="Compétences">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="code"><b>SYS.02</b> · Modules équipés</span><h2>Compétences</h2><span class="rule"></span></div>
+      <div class="modules">
+        <article class="armor module reveal" data-search><div class="in">
+          <span class="slot">M1</span>
+          <span class="code">Couches 1 à 3</span>
+          <h3>Réseaux</h3>
+          <p>Adressage IP, configuration de postes (IP statique, passerelle, proxy), Wi-Fi professionnel (UniFi, Fortinet), alimentation PoE, documentation de parc avec NetBox.</p>
+          <div class="gauge"><span class="code">Niveau 3/5 · <b>Opérationnel</b></span></div>
+        </div></article>
+        <article class="armor module reveal" data-search><div class="in">
+          <span class="slot">M2</span>
+          <span class="code">Serveur</span>
+          <h3>Administration Linux</h3>
+          <p>Déploiement d'une stack sous Debian (PostgreSQL, Redis, Gunicorn, Nginx en reverse proxy), services systemd, gestion des permissions. Arch Linux / Omarchy au quotidien.</p>
+          <div class="gauge"><span class="code">Niveau 3/5 · <b>Opérationnel</b></span></div>
+        </div></article>
+        <article class="armor module reveal" data-search><div class="in">
+          <span class="slot">M3</span>
+          <span class="code">Couche 7</span>
+          <h3>Développement</h3>
+          <p>Applications web en HTML/CSS et Python, intégration d'API (OpenAI), OCR (PaddleOCR), authentification et envoi d'e-mails sécurisé (SMTP/TLS), génération de PDF.</p>
+          <div class="gauge"><span class="code">Niveau 3/5 · <b>Opérationnel</b></span></div>
+        </div></article>
+        <article class="armor module reveal" data-search><div class="in">
+          <span class="slot">M4</span>
+          <span class="code">Parc</span>
+          <h3>Gestion d'équipements</h3>
+          <p>Enrôlement et configuration de flottes mobiles via MDM (Ivanti), déploiement d'applications, installation et raccordement de postes.</p>
+          <div class="gauge"><span class="code">Niveau 2/5 · <b>Bases</b></span></div>
+        </div></article>
+        <article class="armor module reveal" data-search><div class="in">
+          <span class="slot">M5</span>
+          <span class="code">Poste de travail</span>
+          <h3>Systèmes</h3>
+          <p>macOS, Windows et Linux, dual boot, personnalisation d'environnement (Hyprland).</p>
+          <div class="gauge"><span class="code">Niveau 4/5 · <b>Avancé</b></span></div>
+        </div></article>
+        <article class="armor module reveal" data-search><div class="in">
+          <span class="slot">M6</span>
+          <span class="code">Fabrication</span>
+          <h3>Impression 3D</h3>
+          <p>Préparation et lancement d'impressions, réglages machine.</p>
+          <div class="gauge"><span class="code">Niveau 3/5 · <b>Opérationnel</b></span></div>
+        </div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Parcours -->
+  <section id="parcours" data-title="Parcours">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="code"><b>SYS.03</b> · Journal de bord</span><h2>Parcours</h2><span class="rule"></span></div>
+      <div class="log-cols">
+        <div class="armor log reveal"><div class="in">
+          <h3><span>Formation</span><span>LOG-A</span></h3>
+          <ol>
+            <li data-search><span class="when">2024 – 2027</span><div><h4>BUT Réseaux et Télécommunications · parcours Cybersécurité</h4><p>IUT de la Réunion · 3e année en cours</p></div></li>
+            <li data-search><span class="when">2024</span><div><h4>Baccalauréat général, mention assez bien</h4><p>Spécialités Mathématiques et NSI</p></div></li>
+          </ol>
+        </div></div>
+        <div class="armor log reveal"><div class="in">
+          <h3><span>Expériences</span><span>LOG-B</span></h3>
+          <ol>
+            <!-- EXPÉRIENCE CLIQUABLE
+                 data-journal = id du <template> qui contient le journal (voir sous cette carte).
+                 data-poste / data-org = en-tête de la fenêtre ; la période est reprise de .when.
+                 Pour ajouter une expérience : copier ce <li> + son <template>, changer exp-0X. -->
+            <li class="exp" data-search data-journal="journal-exp-01" data-poste="Stagiaire systèmes &amp; réseaux" data-org="Mairie de Saint-Pierre (DSIDNT)" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Consulter le journal de service : Stagiaire systèmes et réseaux, Mairie de Saint-Pierre"><span class="when">Avr. – juin 2026 · 8 semaines</span><div><h4>Stagiaire systèmes &amp; réseaux · Mairie de Saint-Pierre (DSIDNT)</h4><p>Direction informatique d'une commune de près de 100 sites. Déploiement d'un serveur NetBox et documentation de 612 équipements sur 96 sites, mise en place d'un réseau de test UniFi, remplacement des bornes Wi-Fi Fortinet d'un site, configuration de flottes mobiles via MDM, diagnostic d'un blocage d'application lié au MDM, interventions terrain.</p></div><span class="exp-hint" aria-hidden="true">Consulter le journal ▸</span></li>
+          </ol>
+        </div></div>
+      </div>
+
+      <!-- =================================================================
+           JOURNAUX DE SERVICE (contenu des fenêtres des expériences)
+           Un <template> par expérience, id = data-journal de l'entrée.
+             .report-text  : ton récit (sous-titres <h3 class="report-sub">, paragraphes, listes)
+             .report-links : liens en bas de la fenêtre (facultatif)
+           ================================================================= -->
+
+      <!-- Journal EXP-01 -->
+      <template id="journal-exp-01">
+        <div class="report-text">
+          <h3 class="report-sub">En quelques mots</h3>
+          <p>Mon stage de 2e année de BUT s'est déroulé au service informatique de la mairie de Saint-Pierre, pendant huit semaines. C'était ma première vraie immersion dans le monde professionnel, et elle a dépassé ce que j'attendais.</p>
+
+          <h3 class="report-sub">Un départ qui ne s'est pas passé comme prévu</h3>
+          <p>Le projet qu'on m'avait annoncé en entretien n'a finalement pas pu se faire, parce que le bâtiment concerné n'était pas prêt. Sur le moment, c'était déstabilisant. Avec le recul, c'est presque une chance : l'équipe m'a confié des missions très variées à la place, et j'ai touché à bien plus de choses que si je m'étais concentré sur un seul projet.</p>
+
+          <h3 class="report-sub">Ce que j'ai ressenti</h3>
+          <p>Ce qui m'a le plus marqué, c'est l'accueil. Je me suis senti intégré dès les premiers jours, et les techniciens ont pris le temps de m'expliquer leur façon de travailler et de partager leur expérience. Ils m'ont aidé à résoudre des problèmes dont je ne soupçonnais même pas l'existence, toujours avec bonne humeur. Mon tuteur a été une vraie source de motivation tout au long du stage.</p>
+          <p>J'ai aussi beaucoup aimé le terrain. Sortir du bureau, intervenir dans des endroits pas toujours faciles d'accès, gérer les imprévus sur place : c'est là que j'ai vraiment compris ce que veut dire travailler dans l'informatique pour de vrais utilisateurs.</p>
+
+          <h3 class="report-sub">Ce que j'en retire</h3>
+          <ul>
+            <li>Le travail en équipe : on avance beaucoup plus vite en échangeant qu'en restant bloqué seul.</li>
+            <li>La polyvalence : dans un service informatique, on est souvent amené à sortir de son domaine, et j'ai appris à aimer ça.</li>
+            <li>La rigueur : quand on prépare du matériel pour d'autres personnes, chaque détail compte.</li>
+            <li>L'adaptabilité : rebondir quand les choses ne se passent pas comme prévu.</li>
+            <li>La confiance en moi : on m'a confié des responsabilités réelles, et j'ai pu les assumer.</li>
+          </ul>
+
+          <h3 class="report-sub">Et après ?</h3>
+          <p>Ce stage m'a conforté dans mon choix : je veux travailler dans l'administration des systèmes et réseaux. J'ai découvert un métier concret, varié et utile, et j'ai hâte de retrouver ce cadre lors de mon prochain stage.</p>
+        </div>
+        <!-- Lien interne : data-close ferme la fenêtre, puis la page défile vers #projets -->
+        <div class="report-links">
+          <a class="report-more" href="#projets" data-close>Voir les projets réalisés pendant ce stage ▸</a>
+        </div>
+      </template>
+    </div>
+  </section>
+
+  <!-- Projets : missions -->
+  <section id="projets" data-title="Projets">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="code"><b>SYS.04</b> · Ordres de mission</span><h2>Projets</h2><span class="rule"></span></div>
+      <div class="missions">
+        <!-- CARTE DE MISSION
+             data-report = id du bloc <template> qui contient le rapport détaillé (voir plus bas).
+             Pour ajouter un projet : copier une carte + son <template>, changer MSN-0X et l'id. -->
+        <article class="armor mission reveal" data-search data-report="rapport-msn-01" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Ouvrir le rapport de mission MSN-01 : Géocaching du campus Sud"><div class="in">
+          <div class="target"><i aria-hidden="true"></i><span class="num"><small>Mission</small>MSN-01</span><span class="state live">En cours</span></div>
+          <h3>Géocaching du campus Sud</h3>
+          <p>Application qui fait découvrir le campus aux nouveaux étudiants, avec des groupes qui changent pour favoriser les rencontres. Rédaction du cahier des charges.</p>
+          <div class="specs"><span class="code">Specs</span><span class="chip">Cahier des charges</span><span class="chip">Application</span><span class="chip">Vie étudiante</span></div>
+          <span class="open-hint" aria-hidden="true">Ouvrir le rapport ▸</span>
+        </div></article>
+        <article class="armor mission reveal" data-search data-report="rapport-msn-02" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Ouvrir le rapport de mission MSN-02 : Pré-gradage de cartes Pokémon avec implémentation d'IA"><div class="in">
+          <div class="target"><i aria-hidden="true"></i><span class="num"><small>Mission</small>MSN-02</span><span class="state">Archivé</span></div>
+          <h3>Pré-gradage de cartes Pokémon avec implémentation d'IA</h3>
+          <p>Application web d'analyse de cartes à partir d'une photo : score d'état, estimation de prix et rapport PDF. Projet d'équipe de 5 (SAE 3.02).</p>
+          <div class="specs"><span class="code">Specs</span><span class="chip">Python</span><span class="chip">OCR</span><span class="chip">API OpenAI</span><span class="chip">Projet d'équipe</span></div>
+          <span class="open-hint" aria-hidden="true">Ouvrir le rapport ▸</span>
+        </div></article>
+        <article class="armor mission reveal" data-search data-report="rapport-msn-03" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Ouvrir le rapport de mission MSN-03 : Déploiement de NetBox"><div class="in">
+          <div class="target"><i aria-hidden="true"></i><span class="num"><small>Mission</small>MSN-03</span><span class="state">Terminé</span></div>
+          <h3>Déploiement de NetBox</h3>
+          <p>Installation d'un outil de documentation réseau pour la DSI de la mairie de Saint-Pierre : 612 équipements documentés sur 96 sites.</p>
+          <div class="specs"><span class="code">Specs</span><span class="chip">Debian</span><span class="chip">PostgreSQL</span><span class="chip">Nginx</span><span class="chip">Documentation réseau</span></div>
+          <span class="open-hint" aria-hidden="true">Ouvrir le rapport ▸</span>
+        </div></article>
+        <article class="armor mission reveal" data-search data-report="rapport-msn-04" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Ouvrir le rapport de mission MSN-04 : Réseau Wi-Fi de test UniFi"><div class="in">
+          <div class="target"><i aria-hidden="true"></i><span class="num"><small>Mission</small>MSN-04</span><span class="state">Terminé</span></div>
+          <h3>Réseau Wi-Fi de test UniFi</h3>
+          <p>Mise en place d'un contrôleur UniFi et d'une borne U6 Lite pour la veille technologique de la DSI.</p>
+          <div class="specs"><span class="code">Specs</span><span class="chip">UniFi</span><span class="chip">Wi-Fi</span><span class="chip">WPA2</span><span class="chip">Partage de connexion</span></div>
+          <span class="open-hint" aria-hidden="true">Ouvrir le rapport ▸</span>
+        </div></article>
+      </div>
+
+      <!-- =================================================================
+           RAPPORTS DE MISSION (contenu des fenêtres)
+           Un <template> par projet. Son id doit correspondre au data-report de la carte.
+           Il contient jusqu'à 3 blocs, tous facultatifs sauf le premier :
+             .report-text  : ta description (paragraphes, listes, images)
+             .report-docs  : documents joints (bloc masqué s'il n'y a aucun .doc)
+             .report-links : boutons GitHub / démo (un lien sans href n'est pas affiché)
+           Le numéro, le titre, le statut et les SPECS sont repris de la carte automatiquement.
+           ================================================================= -->
+
+      <!-- Rapport MSN-01 -->
+      <template id="rapport-msn-01">
+        <div class="report-text">
+          <!-- STATUT : projet en construction (s'affiche juste sous l'en-tête). Supprime ce bloc quand le projet avance. -->
+          <aside class="building" role="note" aria-label="Statut du projet"><div>
+            <span class="building-label">Statut : en cours de construction</span>
+            <p>Ce projet est actuellement en phase de conception. Cette page sera mise à jour au fil de son avancement.</p>
+          </div></aside>
+          <!-- FIN STATUT -->
+          <p>Ce projet est une application de géocaching pensée pour faire découvrir le campus Sud de l'IUT de la Réunion aux nouveaux étudiants. Le principe : explorer le campus de façon ludique en partant à la recherche de points cachés, plutôt que de le découvrir seul avec un plan.</p>
+          <p>L'application repose sur des groupes qui changent au fil des parties, afin que les étudiants rencontrent un maximum de personnes dès leur arrivée. Je travaille actuellement sur la rédaction du cahier des charges, qui définit les besoins, les fonctionnalités et le fonctionnement de l'application avant le passage au développement.</p>
+          <!-- Image facultative (place le fichier dans images/) :
+          <figure>
+            <img src="images/msn-01-capture.png" alt="Décris l'image en une phrase">
+            <figcaption>Légende de l'image</figcaption>
+          </figure>
+          -->
+        </div>
+        <!-- Documents joints : aucun pour l'instant. Copie ici un bloc <article class="doc"> du rapport MSN-02. -->
+        <div class="report-docs"></div>
+        <!-- Liens : remplis href pour afficher le bouton, laisse href="" pour le masquer -->
+        <div class="report-links">
+          <a class="btn" href="" data-label="GitHub">GitHub</a>
+          <a class="btn" href="" data-label="Démo">Voir la démo</a>
+        </div>
+      </template>
+
+      <!-- Rapport MSN-02 -->
+      <template id="rapport-msn-02">
+        <div class="report-text">
+          <!-- Sous-titres : <h3 class="report-sub">...</h3> -->
+          <h3 class="report-sub">Contexte</h3>
+          <p>Projet réalisé en équipe de 5 étudiants en 2e année de BUT Réseaux et Télécommunications, dans le cadre de la SAE 3.02 « Développer des applications communicantes » (novembre 2025).</p>
+
+          <h3 class="report-sub">Le projet</h3>
+          <p>Une application web de pré-gradage de cartes Pokémon. La plupart des services d'évaluation de cartes étant payants, l'objectif était de proposer un outil gratuit permettant aux collectionneurs d'obtenir une première estimation de l'état et de la valeur de leurs cartes, avant d'envisager un envoi à un service professionnel comme PSA. L'utilisateur crée un compte, importe une photo de sa carte, puis obtient un score d'état sur 10, une estimation de prix et un rapport PDF téléchargeable. Un historique personnel conserve toutes ses analyses.</p>
+
+          <h3 class="report-sub">Mon rôle</h3>
+          <p>J'étais en charge du développement du site : interfaces, traitement côté serveur et intégration des différents services.</p>
+
+          <h3 class="report-sub">Technique</h3>
+          <ul>
+            <li>Front-end HTML/CSS en mobile-first : authentification, import d'image, résultats, historique</li>
+            <li>Back-end en Python : validation et traitement des images, mesures de centrage, de netteté et de défauts de surface</li>
+            <li>Lecture du nom, du numéro et de la série de la carte par OCR (PaddleOCR)</li>
+            <li>Estimation de prix via l'API OpenAI</li>
+            <li>Comptes utilisateurs avec vérification par e-mail (SMTP sécurisé en TLS) et historique propre à chaque utilisateur</li>
+            <li>Génération de rapports PDF avec image, scores et fourchette de prix</li>
+            <li>Mise en ligne via un tunnel ngrok</li>
+          </ul>
+
+          <h3 class="report-sub">Difficultés</h3>
+          <p>Le projet a demandé beaucoup d'adaptation : deux API prévues pour l'analyse et l'estimation des cartes ont cessé d'être maintenues en cours de développement, et d'autres (PokémonTCG, TCGPlayer, Cardmarket, agrégateurs de prix) se sont révélées inutilisables ou peu fiables. J'ai donc basculé l'identification et l'estimation vers OpenAI, en rendant l'exploitation des réponses robuste (extraction du JSON, solutions de repli). Côté OCR, Tesseract ne fonctionnait pas sur nos machines : j'ai migré vers PaddleOCR et ajouté du prétraitement et de la normalisation pour fiabiliser la lecture. J'ai aussi résolu des problèmes plus classiques : limite de taille des uploads (compression côté client), écrasement d'images (noms uniques via uuid4) et historique partagé entre utilisateurs.</p>
+
+          <h3 class="report-sub">Bilan</h3>
+          <p>Ce projet m'a appris à intégrer des API externes, à réagir quand une dépendance disparaît et à construire une application complète, de l'authentification jusqu'à la génération de documents.</p>
+        </div>
+        <div class="report-docs">
+          <!-- DOCUMENT : copie ce bloc <article> pour ajouter un document.
+               Fichiers dans le dossier documents/ à la racine du site. -->
+          <article class="doc">
+            <span class="code"><b>DOC-01</b></span>
+            <h4 class="doc-title">Rapport de projet</h4>
+            <p class="doc-desc">Composition du groupe, technologies, fonctionnalités et difficultés rencontrées</p>
+            <p class="doc-meta">PDF · 208 Ko</p>
+            <div class="doc-actions">
+              <a class="btn btn-accent" href="documents/msn-02-rapport.pdf" target="_blank" rel="noopener" aria-label="Consulter le document : Rapport de projet">Consulter</a>
+              <a class="btn" href="documents/msn-02-rapport.pdf" download aria-label="Télécharger le document : Rapport de projet">Télécharger</a>
+            </div>
+          </article>
+          <article class="doc">
+            <span class="code"><b>DOC-02</b></span>
+            <h4 class="doc-title">Guide d'utilisation</h4>
+            <p class="doc-desc">Création de compte, connexion, scan et lecture des résultats</p>
+            <p class="doc-meta">PDF · 970 Ko</p>
+            <div class="doc-actions">
+              <a class="btn btn-accent" href="documents/msn-02-guide.pdf" target="_blank" rel="noopener" aria-label="Consulter le document : Guide d'utilisation">Consulter</a>
+              <a class="btn" href="documents/msn-02-guide.pdf" download aria-label="Télécharger le document : Guide d'utilisation">Télécharger</a>
+            </div>
+          </article>
+          <!-- AVERTISSEMENT : projet hors ligne
+               À placer en DERNIER dans <div class="report-docs"> (s'affiche sous les documents).
+               Pour le retirer : supprime ce bloc. Pour le réutiliser : copie-le dans le report-docs d'un autre projet. -->
+          <aside class="offline" role="note" aria-label="Statut du projet">
+            <span class="offline-label">Statut : hors ligne</span>
+            <p>Ce projet n'est malheureusement plus en ligne en raison du coût des clés API OpenAI nécessaires à son fonctionnement. Les documents ci-dessus présentent son fonctionnement et les résultats obtenus.</p>
+          </aside>
+          <!-- FIN AVERTISSEMENT -->
+        </div>
+        <div class="report-links">
+          <a class="btn" href="" data-label="GitHub">GitHub</a>
+          <!-- Pas de bouton démo : projet hors ligne -->
+        </div>
+      </template>
+
+      <!-- Rapport MSN-03 -->
+      <template id="rapport-msn-03">
+        <div class="report-text">
+          <h3 class="report-sub">Contexte</h3>
+          <p>Stage de 8 semaines à la DSIDNT de la mairie de Saint-Pierre, qui gère l'infrastructure informatique de près d'une centaine de sites (écoles, mairies annexes, services techniques). Le suivi du parc réseau reposait jusque-là sur des outils vieillissants.</p>
+          <h3 class="report-sub">Objectif</h3>
+          <p>Centraliser la documentation de l'infrastructure (équipements, adresses IP, câblage, emplacements physiques) dans NetBox, un outil open source consultable et modifiable par toute l'équipe.</p>
+          <h3 class="report-sub">Ce que j'ai fait</h3>
+          <ul>
+            <li>Installation sur une machine virtuelle Debian (32 Go de RAM, 128 Go de stockage)</li>
+            <li>Mise en place de PostgreSQL (base de données) et Redis (cache)</li>
+            <li>Configuration de Gunicorn (serveur WSGI) et de Nginx en reverse proxy pour exposer l'interface sur le réseau interne</li>
+            <li>Sécurisation de base : clé secrète, restriction des adresses autorisées, compte administrateur</li>
+            <li>Services systemd pour un démarrage automatique en production</li>
+            <li>Saisie de l'infrastructure : sites, baies, équipements, adresses IP, connexions, constructeurs et modèles</li>
+            <li>Rédaction d'une procédure d'utilisation pour l'équipe</li>
+          </ul>
+          <h3 class="report-sub">Difficultés</h3>
+          <p>L'installation demandait de respecter un ordre précis et de garder des fichiers de configuration cohérents ; j'ai notamment dû résoudre des problèmes de configuration Nginx et de permissions. Pour la documentation, certaines informations n'étaient pas centralisées : il fallait les vérifier directement sur les équipements ou auprès des techniciens.</p>
+          <h3 class="report-sub">Résultat</h3>
+          <p>612 équipements documentés sur 96 sites lors de cette première phase. La DSI dispose désormais d'un outil de documentation centralisé et maintenable.</p>
+          <!-- MON RETOUR : commentaire personnel (modifie seulement le texte du <p>) -->
+          <h3 class="report-sub">Mon retour</h3>
+          <blockquote class="retour" data-search>
+            <p>C'est le projet dont je suis le plus fier de mon stage. Installer une stack complète sous Linux, avec la base de données, le cache, le serveur d'application et le reverse proxy, m'a fait comprendre comment toutes ces briques s'emboîtent, bien mieux qu'en cours. Mais ce qui m'a le plus appris, c'est la partie documentation : vérifier chaque information sur le terrain ou auprès des techniciens m'a montré ce que représente réellement la gestion d'un parc réseau à l'échelle d'une commune. Ce projet m'a aussi appris la rigueur et le travail en équipe, et savoir que l'outil est aujourd'hui utilisé par toute la DSI est une vraie satisfaction.</p>
+            <footer class="retour-sign">— E. Pobrezo</footer>
+          </blockquote>
+          <!-- /MON RETOUR -->
+        </div>
+        <!-- Documents joints : copie ici un bloc <article class="doc"> si besoin -->
+        <div class="report-docs"></div>
+        <div class="report-links"></div>
+      </template>
+
+      <!-- Rapport MSN-04 -->
+      <template id="rapport-msn-04">
+        <div class="report-text">
+          <h3 class="report-sub">Contexte</h3>
+          <p>Mission confiée en parallèle de NetBox, dans le cadre des tests et de la veille technologique de la DSI.</p>
+          <h3 class="report-sub">Ce que j'ai fait</h3>
+          <ul>
+            <li>Installation du contrôleur UniFi Network Application</li>
+            <li>Raccordement d'une borne UniFi U6 Lite via un switch, puis adoption depuis le contrôleur</li>
+            <li>Configuration du Wi-Fi : SSID, sécurité WPA2, bandes 2,4 GHz et 5 GHz</li>
+            <li>Partage de la connexion du poste vers la borne pour diffuser Internet en Wi-Fi</li>
+          </ul>
+          <h3 class="report-sub">Difficultés</h3>
+          <p>La borne perdait son adoption à cause de mises à jour qui se relançaient en boucle : j'ai dû la réinitialiser et désactiver les mises à jour automatiques. Il fallait aussi s'assurer que le contrôleur et la borne étaient sur le même réseau local pour que la détection fonctionne.</p>
+          <h3 class="report-sub">Bilan</h3>
+          <p>Une première approche concrète de la gestion centralisée de bornes Wi-Fi et de la circulation du trafic entre équipements.</p>
+          <!-- MON RETOUR : commentaire personnel (modifie seulement le texte du <p>) -->
+          <h3 class="report-sub">Mon retour</h3>
+          <blockquote class="retour" data-search>
+            <p>Même si ce n'était qu'un petit réseau de test, j'ai vraiment apprécié cette mission. Partager une connexion à travers une borne peut sembler simple, mais il faut bien comprendre comment le trafic circule entre les équipements pour que ça fonctionne. Le problème des mises à jour en boucle m'a aussi appris à garder mon calme et à chercher méthodiquement l'origine d'un blocage. Pouvoir manipuler une technologie aussi répandue en entreprise pendant mon stage, c'était une vraie chance.</p>
+            <footer class="retour-sign">— E. Pobrezo</footer>
+          </blockquote>
+          <!-- /MON RETOUR -->
+        </div>
+        <div class="report-docs"></div>
+        <div class="report-links"></div>
+      </template>
+    </div>
+  </section>
+
+  <!-- Modules secondaires (accordéon) -->
+  <section id="modules" data-title="Modules secondaires">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="code"><b>SYS.ANNEXES</b></span><h2>Modules secondaires</h2><span class="rule"></span></div>
+      <ul class="mods">
+        <li class="armor mod" data-search><div class="in">
+          <h3><button class="mod-btn" type="button" aria-expanded="false" aria-controls="mod-01-panel" id="mod-01-btn">
+            <span class="mod-num">MOD-01</span><span class="mod-title">Administration Linux</span><span class="mod-sign" aria-hidden="true"></span>
+          </button></h3>
+          <div class="mod-panel" id="mod-01-panel" role="region" aria-labelledby="mod-01-btn"><div class="mod-body">
+            <p>Installation et configuration d'Arch Linux puis d'Omarchy avec Hyprland, gestion d'un dual boot avec Windows. J'aime comprendre et personnaliser mon système en profondeur.</p>
+          </div></div>
+        </div></li>
+        <li class="armor mod" data-search><div class="in">
+          <h3><button class="mod-btn" type="button" aria-expanded="false" aria-controls="mod-02-panel" id="mod-02-btn">
+            <span class="mod-num">MOD-02</span><span class="mod-title">Développement web</span><span class="mod-sign" aria-hidden="true"></span>
+          </button></h3>
+          <div class="mod-panel" id="mod-02-panel" role="region" aria-labelledby="mod-02-btn"><div class="mod-body">
+            <p>Création d'applications web, dont une application de géocaching pour faire découvrir le campus Sud de l'IUT de la Réunion. J'aime mener un projet de l'idée jusqu'à la mise en ligne.</p>
+          </div></div>
+        </div></li>
+        <li class="armor mod" data-search><div class="in">
+          <h3><button class="mod-btn" type="button" aria-expanded="false" aria-controls="mod-03-panel" id="mod-03-btn">
+            <span class="mod-num">MOD-03</span><span class="mod-title">Impression 3D</span><span class="mod-sign" aria-hidden="true"></span>
+          </button></h3>
+          <div class="mod-panel" id="mod-03-panel" role="region" aria-labelledby="mod-03-btn"><div class="mod-body">
+            <p>Préparation et lancement d'impressions, réglages de la machine. Un côté maker qui me permet de passer du numérique au concret.</p>
+          </div></div>
+        </div></li>
+        <li class="armor mod" data-search><div class="in">
+          <h3><button class="mod-btn" type="button" aria-expanded="false" aria-controls="mod-04-panel" id="mod-04-btn">
+            <span class="mod-num">MOD-04</span><span class="mod-title">Hardware</span><span class="mod-sign" aria-hidden="true"></span>
+          </button></h3>
+          <div class="mod-panel" id="mod-04-panel" role="region" aria-labelledby="mod-04-btn"><div class="mod-body">
+            <p>Intérêt pour les composants et la configuration de machines performantes, de la compatibilité des pièces à l'optimisation.</p>
+          </div></div>
+        </div></li>
+        <li class="armor mod" data-search><div class="in">
+          <h3><button class="mod-btn" type="button" aria-expanded="false" aria-controls="mod-05-panel" id="mod-05-btn">
+            <span class="mod-num">MOD-05</span><span class="mod-title">Design d'interface &amp; culture SF</span><span class="mod-sign" aria-hidden="true"></span>
+          </button></h3>
+          <div class="mod-panel" id="mod-05-panel" role="region" aria-labelledby="mod-05-btn"><div class="mod-body">
+            <p>L'univers des mechas et de la science-fiction m'inspire, notamment pour l'identité visuelle de ce portfolio.</p>
+            <!-- PALETTE D'UNITÉ : un bouton par palette (data-pal = valeur de data-palette sur <html>).
+                 Les couleurs de la pastille sont celles de la palette, écrites ici volontairement. -->
+            <div class="palette">
+              <span class="code" id="pal-label">Palette d'unité</span>
+              <div class="pal-list" role="group" aria-labelledby="pal-label">
+                <button class="pal-btn" type="button" data-pal="rx93" aria-pressed="true" aria-label="Appliquer la palette RX-93"><span class="pal-frame"><span class="pal-face"><span class="pal-swatch" aria-hidden="true"><i style="background:#14161a"></i><i style="background:#f2c230"></i><i style="background:#d6402b"></i></span><span class="pal-name">RX-93</span></span></span></button>
+                <button class="pal-btn" type="button" data-pal="rx78" aria-pressed="false" aria-label="Appliquer la palette RX-78"><span class="pal-frame"><span class="pal-face"><span class="pal-swatch" aria-hidden="true"><i style="background:#eef0f4"></i><i style="background:#4a85ff"></i><i style="background:#e0303e"></i></span><span class="pal-name">RX-78</span></span></span></button>
+                <button class="pal-btn" type="button" data-pal="zaku" aria-pressed="false" aria-label="Appliquer la palette ZAKU II"><span class="pal-frame"><span class="pal-face"><span class="pal-swatch" aria-hidden="true"><i style="background:#1b2318"></i><i style="background:#8fbf4a"></i><i style="background:#ff4f7a"></i></span><span class="pal-name">ZAKU II</span></span></span></button>
+                <button class="pal-btn" type="button" data-pal="gfred" aria-pressed="false" aria-label="Appliquer la palette GFRED"><span class="pal-frame"><span class="pal-face"><span class="pal-swatch" aria-hidden="true"><i style="background:#9b6cff"></i><i style="background:#a8e03a"></i></span><span class="pal-name">GFRED</span></span></span></button>
+              </div>
+            </div>
+          </div></div>
+        </div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" data-title="Contact">
+    <div class="wrap">
+      <div class="armor contact reveal"><div class="in">
+        <div>
+          <p class="code"><b>SYS.05</b> · Canal ouvert</p>
+          <h2>Travaillons ensemble</h2>
+          <p data-search>Un stage ou un projet concret en réseaux ou en développement web : écrivez-moi.</p>
+        </div>
+        <div class="c-list">
+          <div class="c-item" data-search>
+            <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14"/><path d="m3 7 9 6 9-6"/></svg>
+            <div class="c-text"><small>E-mail</small><a href="mailto:e.pobrezo@rt-iut.re">e.pobrezo@rt-iut.re</a></div>
+            <button class="copy" type="button" data-copy="e.pobrezo@rt-iut.re">Copier</button>
+          </div>
+          <!-- Liens GitHub / LinkedIn : mets ton URL dans href. Un href vide masque la ligne. -->
+          <div class="c-item c-optional" data-search>
+            <svg viewBox="0 0 24 24"><path d="M9 19c-4 1.3-4-2-6-2.5M15 21v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.7 4.7 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.6 11.6 0 0 0-6 0C6.8 2.8 5.8 3.1 5.8 3.1a4.3 4.3 0 0 0-.1 3.2A4.7 4.7 0 0 0 4.4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+            <div class="c-text"><small>GitHub</small><a href="" target="_blank" rel="noopener"><!-- [URL GitHub] -->Voir mon profil GitHub</a></div>
+          </div>
+          <div class="c-item c-optional" data-search>
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg>
+            <div class="c-text"><small>LinkedIn</small><a href="" target="_blank" rel="noopener"><!-- [URL LinkedIn] -->Voir mon profil LinkedIn</a></div>
+          </div>
+          <div class="c-item" data-search>
+            <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+            <div class="c-text"><small>Adresse</small><span>Saint-Pierre, La Réunion</span></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <span>&copy; <span id="year">2026</span> Ethan Pobrezo · BUT Réseaux et Télécommunications</span>
+    <button class="linkish" id="cookieReopen" type="button">Gérer les cookies</button>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Retour en haut de page">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+</button>
+
+<!-- Bandeau cookies -->
+<div class="armor cookie" id="cookie" role="dialog" aria-labelledby="cookieTitle" hidden><div class="in">
+  <div>
+    <strong id="cookieTitle">Cookies</strong>
+    <p>Ce site n'utilise aucun cookie publicitaire ni de mesure d'audience. Avec votre accord, il retient seulement votre choix de thème clair ou sombre sur cet appareil.</p>
+  </div>
+  <div class="cookie-actions">
+    <button class="btn btn-accent" id="cookieOk" type="button">Accepter</button>
+    <button class="btn" id="cookieNo" type="button">Refuser</button>
+  </div>
+</div></div>
+
+<!-- Fenêtre « rapport de mission » (remplie par le JS à partir de la carte et de son <template>) -->
+<div class="report" id="report" hidden>
+  <div class="report-backdrop" data-close></div>
+  <div class="armor report-panel" role="dialog" aria-modal="true" aria-labelledby="report-title" tabindex="-1"><div class="in">
+    <button class="report-close" type="button" data-close aria-label="Fermer la fenêtre">✕ Fermer</button>
+    <header class="report-head">
+      <span class="code" id="report-label">Rapport de mission</span>
+      <span class="report-num" id="report-num"></span>
+      <h2 id="report-title"></h2>
+      <span id="report-state"></span>
+    </header>
+    <div class="report-content" id="report-content"></div>
+    <footer class="report-foot">
+      <div class="specs" id="report-specs"></div>
+      <div class="report-links" id="report-links"></div>
+    </footer>
+  </div></div>
+</div>
+
+<!-- Recherche -->
+<div class="search" id="search" role="dialog" aria-modal="true" aria-label="Recherche sur le site" hidden>
+  <div class="armor search-box"><div class="in">
+    <div class="search-field">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <label class="sr-only" for="q">Rechercher</label>
+      <input id="q" type="search" placeholder="Rechercher : réseaux, stage, 3D..." autocomplete="off">
+      <span class="kbd">Échap</span>
+    </div>
+    <ul class="results" id="results" aria-live="polite"></ul>
+  </div></div>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  /* Stockage local protégé (navigation privée, stockage bloqué) */
+  var store={
+    get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},
+    set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}},
+    del:function(k){try{localStorage.removeItem(k)}catch(e){}}
+  };
+
+  /* Démarrage système : masqué après 0,8 s au plus */
+  var boot=document.getElementById('boot');
+  setTimeout(function(){boot.classList.add('done')},800);
+
+  document.getElementById('year').textContent=new Date().getFullYear();
+
+  /* Thème clair / sombre */
+  var consent=store.get('ep-consent');
+  var saved=consent==='yes'?store.get('ep-theme'):null;
+  if(saved)root.setAttribute('data-theme',saved);
+  var themeBtn=document.getElementById('themeBtn');
+  function isLight(){
+    var t=root.getAttribute('data-theme');
+    return t?t==='light':window.matchMedia('(prefers-color-scheme: light)').matches;
+  }
+  function syncThemeLabel(){themeBtn.setAttribute('aria-label',isLight()?'Activer le mode sombre':'Activer le mode clair')}
+  syncThemeLabel();
+  themeBtn.addEventListener('click',function(){
+    var next=isLight()?'dark':'light';
+    root.setAttribute('data-theme',next);
+    if(store.get('ep-consent')==='yes')store.set('ep-theme',next);
+    syncThemeLabel();
+  });
+
+  /* Palette d'unité (boutons dans MOD-05) : data-palette sur <html>, favicon assorti */
+  var PALS={rx93:['#14161a','#f2c230'],rx78:['#10141d','#4a85ff'],zaku:['#111610','#8fbf4a'],gfred:['#14111c','#a8e03a']};
+  var favicon=document.querySelector('link[rel="icon"]');
+  var palBtns=[].slice.call(document.querySelectorAll('.pal-btn[data-pal]'));
+  function setPalette(p,animate){
+    if(!PALS[p])p='rx93';
+    if(animate){root.classList.add('pal-switch');clearTimeout(setPalette.t);setPalette.t=setTimeout(function(){root.classList.remove('pal-switch')},350)}
+    root.setAttribute('data-palette',p);
+    palBtns.forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-pal')===p?'true':'false')});
+    if(favicon)favicon.setAttribute('href',"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M12 0H64V52L52 64H0V12Z' fill='%23"+PALS[p][0].slice(1)+"'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-weight='700' font-size='30' fill='%23"+PALS[p][1].slice(1)+"'%3EEP%3C/text%3E%3C/svg%3E");
+  }
+  setPalette(root.getAttribute('data-palette'),false);
+  palBtns.forEach(function(b){
+    b.addEventListener('click',function(){
+      var p=b.getAttribute('data-pal');
+      setPalette(p,true);
+      if(store.get('ep-consent')==='yes')store.set('ep-palette',p);
+    });
+  });
+
+  /* Cookies */
+  var cookie=document.getElementById('cookie');
+  if(!consent)cookie.hidden=false;
+  document.getElementById('cookieOk').addEventListener('click',function(){
+    store.set('ep-consent','yes');
+    if(root.getAttribute('data-theme'))store.set('ep-theme',root.getAttribute('data-theme'));
+    store.set('ep-palette',root.getAttribute('data-palette'));
+    cookie.hidden=true;
+  });
+  document.getElementById('cookieNo').addEventListener('click',function(){
+    store.set('ep-consent','no');store.del('ep-theme');store.del('ep-palette');cookie.hidden=true;
+  });
+  document.getElementById('cookieReopen').addEventListener('click',function(){cookie.hidden=false});
+
+  /* Menu mobile */
+  var burger=document.getElementById('burger'),menu=document.getElementById('menu'),bp=document.getElementById('burgerPath');
+  function setMenu(open){
+    menu.classList.toggle('open',open);
+    burger.setAttribute('aria-expanded',open);
+    burger.setAttribute('aria-label',open?'Fermer le menu':'Ouvrir le menu');
+    bp.setAttribute('d',open?'M6 6l12 12M18 6 6 18':'M4 7h16M4 12h16M4 17h16');
+  }
+  burger.addEventListener('click',function(){setMenu(!menu.classList.contains('open'))});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setMenu(false)})});
+
+  /* Section active, retour en haut */
+  var toTop=document.getElementById('toTop');
+  var links=[].slice.call(menu.querySelectorAll('a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  function onScroll(){
+    var y=window.scrollY;
+    toTop.classList.toggle('show',y>500);
+    var cur=-1;
+    secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<window.innerHeight*.35)cur=i});
+    links.forEach(function(a,i){a.classList.toggle('active',i===cur);if(i===cur)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  toTop.addEventListener('click',function(){
+    window.scrollTo({top:0,behavior:'smooth'});
+    document.querySelector('.brand').focus({preventScroll:true});
+  });
+
+  /* Boutons Copier */
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click',function(){
+      var v=b.getAttribute('data-copy');
+      function ok(){b.textContent='Copié';setTimeout(function(){b.textContent='Copier'},1600)}
+      function fallback(){
+        var r=document.createRange();r.selectNodeContents(b.parentNode.querySelector('.c-text a'));
+        var s=window.getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Sélectionné';
+        setTimeout(function(){b.textContent='Copier'},1600);
+      }
+      try{navigator.clipboard.writeText(v).then(ok,fallback)}catch(e){fallback()}
+    });
+  });
+
+  /* Modules secondaires : accordéon (plusieurs éléments ouverts possibles) */
+  document.querySelectorAll('.mod-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var open=btn.getAttribute('aria-expanded')!=='true';
+      btn.setAttribute('aria-expanded',open);
+      btn.closest('.mod').classList.toggle('open',open);
+    });
+  });
+
+  /* Rapports de mission : ouverture de la fenêtre depuis une carte .mission[data-report].
+     Aucun réglage par projet ici : tout vient de la carte et de son <template>. */
+  var report=document.getElementById('report'),reportPanel=report.querySelector('.report-panel');
+  var lastCard=null;
+  function openReport(card){
+    var tpl=document.getElementById(card.getAttribute('data-report'));
+    if(!tpl)return;
+    var frag=tpl.content.cloneNode(true);
+    // En-tête repris de la carte
+    document.getElementById('report-label').textContent='Rapport de mission';
+    document.getElementById('report-num').textContent=card.querySelector('.num').lastChild.textContent.trim();
+    document.getElementById('report-title').textContent=card.querySelector('h3').textContent;
+    var st=document.getElementById('report-state');st.innerHTML='';st.appendChild(card.querySelector('.state').cloneNode(true));
+    // Corps : description + documents joints (seulement s'il y en a)
+    var content=document.getElementById('report-content');content.innerHTML='';
+    var text=frag.querySelector('.report-text');if(text)content.appendChild(text);
+    var docs=frag.querySelector('.report-docs');
+    if(docs&&docs.querySelector('.doc')){
+      var wrap=document.createElement('div');wrap.className='report-docs-wrap';
+      wrap.innerHTML='<h3>Documents joints</h3>';wrap.appendChild(docs);content.appendChild(wrap);
+    }
+    // Pied : SPECS de la carte + liens renseignés uniquement
+    var specs=document.getElementById('report-specs');specs.innerHTML=card.querySelector('.specs').innerHTML;
+    fillLinks(frag);
+    showReport(card);
+  }
+  // Liens du pied : seulement ceux renseignés ; les liens externes s'ouvrent dans un nouvel onglet
+  function fillLinks(frag){
+    var links=document.getElementById('report-links');links.innerHTML='';
+    frag.querySelectorAll('.report-links a').forEach(function(a){
+      var h=a.getAttribute('href');
+      if(!h)return;
+      if(h.charAt(0)!=='#'){a.target='_blank';a.rel='noopener'}
+      links.appendChild(a);
+    });
+  }
+  function showReport(trigger){
+    lastCard=trigger;
+    report.hidden=false;
+    root.classList.add('report-open');
+    report.scrollTop=0;
+    report.querySelector('.report-close').focus();
+  }
+  function closeReport(){
+    if(report.hidden)return;
+    report.hidden=true;
+    root.classList.remove('report-open');
+    if(lastCard)lastCard.focus({preventScroll:true});
+  }
+  document.querySelectorAll('.mission[data-report]').forEach(function(card){
+    card.addEventListener('click',function(){openReport(card)});
+    card.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();openReport(card)}
+    });
+  });
+  report.addEventListener('click',function(e){if(e.target.closest('[data-close]'))closeReport()});
+  // Échap pour fermer + focus piégé dans la fenêtre
+  report.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){e.stopPropagation();closeReport();return}
+    if(e.key!=='Tab')return;
+    var f=[].slice.call(reportPanel.querySelectorAll('a[href],button,[tabindex]:not([tabindex="-1"])'));
+    if(!f.length)return;
+    var first=f[0],last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+  });
+
+  /* Journaux de service : ouverture depuis une entrée .exp[data-journal] (section Parcours).
+     Même fenêtre que les rapports de mission ; tout le contenu vient de l'entrée et de son <template>. */
+  function openJournal(entry){
+    var tpl=document.getElementById(entry.getAttribute('data-journal'));
+    if(!tpl)return;
+    var frag=tpl.content.cloneNode(true);
+    document.getElementById('report-label').textContent='Journal de service';
+    document.getElementById('report-num').textContent='';
+    document.getElementById('report-title').textContent=entry.getAttribute('data-poste');
+    var st=document.getElementById('report-state');
+    st.innerHTML='<span class="report-meta"></span>';
+    st.firstChild.textContent=entry.getAttribute('data-org')+' · '+entry.querySelector('.when').textContent;
+    var content=document.getElementById('report-content');content.innerHTML='';
+    var text=frag.querySelector('.report-text');if(text)content.appendChild(text);
+    document.getElementById('report-specs').innerHTML='';
+    fillLinks(frag);
+    showReport(entry);
+  }
+  document.querySelectorAll('.exp[data-journal]').forEach(function(entry){
+    entry.addEventListener('click',function(){openJournal(entry)});
+    entry.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();openJournal(entry)}
+    });
+  });
+
+  /* Recherche sur tout le site (éléments marqués data-search) */
+  var search=document.getElementById('search'),q=document.getElementById('q'),results=document.getElementById('results');
+  var index=[].slice.call(document.querySelectorAll('[data-search]')).filter(function(el){return el.getClientRects().length}).map(function(el,i){
+    var sec=el.closest('[data-title]');
+    if(!el.id)el.id='r'+i;
+    return {el:el,sec:sec?sec.getAttribute('data-title'):'',text:el.textContent.replace(/\s+/g,' ').trim()};
+  });
+  // Contenu des fenêtres (templates) : un résultat ouvre directement la fenêtre correspondante
+  document.querySelectorAll('[data-report],[data-journal]').forEach(function(trigger,i){
+    var tpl=document.getElementById(trigger.getAttribute('data-report')||trigger.getAttribute('data-journal'));
+    if(!tpl)return;
+    if(!trigger.id)trigger.id='w'+i;
+    var t=tpl.content.querySelector('.report-text');
+    index.push({el:trigger,open:true,sec:trigger.hasAttribute('data-journal')?'Journal de service':'Rapport de mission',text:(t?t.textContent:'').replace(/\s+/g,' ').trim()});
+  });
+  function norm(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')}
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function snippet(t,pos,len){
+    var a=Math.max(0,pos-40),b=Math.min(t.length,pos+len+60);
+    return (a>0?'... ':'')+esc(t.slice(a,pos))+'<mark>'+esc(t.slice(pos,pos+len))+'</mark>'+esc(t.slice(pos+len,b))+(b<t.length?' ...':'');
+  }
+  var sel=0;
+  function render(){
+    var term=norm(q.value.trim());
+    results.innerHTML='';sel=0;
+    if(!term){
+      ['Profil','Compétences','Parcours','Projets','Contact'].forEach(function(n){
+        var s=document.querySelector('[data-title="'+n+'"]');
+        results.insertAdjacentHTML('beforeend','<li><a href="#'+s.id+'"><span class="r-sec">Section</span><span class="r-txt">'+n+'</span></a></li>');
+      });
+    }else{
+      var hits=index.filter(function(it){return norm(it.text).indexOf(term)>-1||norm(it.sec).indexOf(term)>-1});
+      if(!hits.length){results.innerHTML='<li class="empty">Aucun résultat pour « '+esc(q.value.trim())+' ». Essayez « réseaux », « stage » ou « web ».</li>';return}
+      hits.forEach(function(it){
+        var p=norm(it.text).indexOf(term);
+        var txt=p>-1?snippet(it.text,p,term.length):esc(it.text.slice(0,110));
+        results.insertAdjacentHTML('beforeend','<li><a href="#'+it.el.id+'"'+(it.open?' data-open':'')+'><span class="r-sec">'+esc(it.sec)+'</span><span class="r-txt">'+txt+'</span></a></li>');
+      });
+    }
+    highlight();
+  }
+  function items(){return [].slice.call(results.querySelectorAll('a'))}
+  function highlight(){items().forEach(function(a,i){a.classList.toggle('sel',i===sel)})}
+  var lastFocus=null;
+  function openSearch(){lastFocus=document.activeElement;search.hidden=false;q.value='';render();setTimeout(function(){q.focus()},20);setMenu(false)}
+  function closeSearch(){search.hidden=true;if(lastFocus)lastFocus.focus({preventScroll:true})}
+  document.getElementById('searchBtn').addEventListener('click',openSearch);
+  q.addEventListener('input',render);
+  search.addEventListener('click',function(e){if(e.target===search)closeSearch()});
+  results.addEventListener('click',function(e){
+    var a=e.target.closest('a');if(!a)return;
+    e.preventDefault();
+    var t=document.getElementById(a.getAttribute('href').slice(1));
+    search.hidden=true;
+    if(a.hasAttribute('data-open')){t.scrollIntoView({block:'center'});t.click();return}  /* résultat dans une fenêtre : on l'ouvre */
+    /* résultat dans un module fermé : on le déplie */
+    if(t.classList.contains('mod')&&!t.classList.contains('open'))t.querySelector('.mod-btn').click();
+    t.scrollIntoView({behavior:'smooth',block:'center'});
+    t.classList.remove('flash','fade');void t.offsetWidth;t.classList.add('flash');
+    setTimeout(function(){t.classList.add('fade')},600);
+    setTimeout(function(){t.classList.remove('flash','fade')},2200);
+  });
+  document.addEventListener('keydown',function(e){
+    if(!report.hidden)return;  /* le rapport ouvert gère ses propres touches */
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();search.hidden?openSearch():closeSearch();return}
+    if(e.key==='Escape'){if(!search.hidden)closeSearch();else if(menu.classList.contains('open'))setMenu(false)}
+    if(search.hidden)return;
+    var list=items();
+    if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(sel+1,list.length-1);highlight();list[sel]&&list[sel].scrollIntoView({block:'nearest'})}
+    if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(sel-1,0);highlight();list[sel]&&list[sel].scrollIntoView({block:'nearest'})}
+    if(e.key==='Enter'&&document.activeElement===q&&list[sel]){e.preventDefault();list[sel].click()}
+  });
+})();
+</script>
+</body>
+</html>
